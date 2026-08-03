@@ -1,0 +1,587 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MATRI6</title>
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@900&family=Space+Grotesk:wght@700&family=Syncopate:wght@700&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <div id="cursor-image"></div>
+    <h1 id="main-header" class="brand-title">
+        <span>M</span><span>A</span><span>T</span><span>R</span><span>I</span><span>6</span>
+    </h1>
+    <main class="scroll-container">
+        <!-- Section 1: Landing Page -->
+        <section class="landing-page">
+            <div class="content-wrapper">
+                <div class="title-placeholder"></div>
+
+
+                <div class="art-container">
+                    <canvas id="geoCanvas"></canvas>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: The Ecosystem -->
+        <section class="ecosystem-section" style="background-color: #ff6c3d;">
+            <div class="ecosystem-container">
+                <div class="ecosystem-title-wrapper">
+                    <div class="eco-art-container">
+                        <canvas id="ecoGeoCanvasLeft"></canvas>
+                    </div>
+                    <h2 class="ecosystem-title">THE ECOSYSTEM</h2>
+                    <div class="eco-art-container">
+                        <canvas id="ecoGeoCanvasRight"></canvas>
+                    </div>
+                </div>
+                <div class="ecosystem-grid">
+                    <div class="grid-item" data-image="https://picsum.photos/seed/ai/400/400">AI PRODUCTS</div>
+                    <div class="grid-item right-align" data-image="https://picsum.photos/seed/commune/400/400">
+                        COMMUNE</div>
+                    <div class="grid-item" data-image="https://picsum.photos/seed/venture/400/400">VENTURE NETWORK</div>
+                    <div class="grid-item right-align" data-image="https://picsum.photos/seed/hackathon/400/400">
+                        HACKATHONS</div>
+                    <div class="grid-item" data-image="https://picsum.photos/seed/launchpad/400/400">LAUNCHPAD
+                    </div>
+                    <div class="grid-item right-align" data-image="https://picsum.photos/seed/academy/400/400">ACADEMY
+                    </div>
+                </div>
+            </div>
+
+            <!-- Marquee Strip (Left to Right) -->
+            <div class="marquee-strip">
+                <div class="marquee-track">
+                    <span class="marquee-text">BUILDING THE FUTURE OF AMBITION! &nbsp;&bull;&nbsp; BUILDING THE FUTURE
+                        OF AMBITION! &nbsp;&bull;&nbsp; BUILDING THE FUTURE OF AMBITION! &nbsp;&bull;&nbsp; BUILDING THE
+                        FUTURE OF AMBITION! &nbsp;&bull;&nbsp;</span>
+                    <span class="marquee-text">BUILDING THE FUTURE OF AMBITION! &nbsp;&bull;&nbsp; BUILDING THE FUTURE
+                        OF AMBITION! &nbsp;&bull;&nbsp; BUILDING THE FUTURE OF AMBITION! &nbsp;&bull;&nbsp; BUILDING THE
+                        FUTURE OF AMBITION! &nbsp;&bull;&nbsp;</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: The Vision -->
+        <section class="vision-section">
+            <div class="vision-container">
+                <div class="vision-header">
+                    <h2>MAYBE<br>YOU KNOW THAT FEELING...</h2>
+                </div>
+                <div class="vision-content-wrapper">
+                    <div class="vision-art-container">
+                        <canvas id="visionGeoCanvas"></canvas>
+                    </div>
+                    <div class="vision-grid-wrapper">
+                        <div class="vision-col">
+                            <div class="vision-item">
+                                <span class="vision-num">01</span>
+                                <p class="vision-text">GREAT IDEAS DIE WITHOUT THE RIGHT NETWORK.</p>
+                            </div>
+                            <div class="vision-item">
+                                <span class="vision-num">02</span>
+                                <p class="vision-text">COMPETITORS SHIP FASTER WITH BETTER TOOLS.</p>
+                            </div>
+                            <div class="vision-item">
+                                <span class="vision-num">03</span>
+                                <p class="vision-text">YOU'RE BUILDING, BUT LACK DISTRIBUTION.</p>
+                            </div>
+                        </div>
+                        <div class="vision-col">
+                            <div class="vision-item">
+                                <span class="vision-num">04</span>
+                                <p class="vision-text">TALENT IS SCATTERED AND HARD TO RETAIN.</p>
+                            </div>
+                            <div class="vision-item">
+                                <span class="vision-num">05</span>
+                                <p class="vision-text">YOU NEED FUNDING, BUT INVESTORS DON'T GET IT.</p>
+                            </div>
+                            <div class="vision-action">
+                                <button class="vision-btn">YES, I'M READY TO BUILD!</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 4: Why MATRI6 -->
+        <section class="why-section">
+            <div class="why-container">
+                <div class="why-header">
+                    <h2>WHY MATRI6?</h2>
+                    <div class="why-title-art">
+                        <canvas id="whyTitleCanvas"></canvas>
+                    </div>
+                </div>
+                <div class="why-cards-wrapper">
+                    <!-- Card 1 -->
+                    <div class="why-card">
+                        <canvas id="whyCanvas1" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">AI SYNERGY.</h3>
+                            <p class="why-card-desc">Seamlessly integrate artificial<br>intelligence.</p>
+                            <span class="why-card-num">01</span>
+                        </div>
+                    </div>
+                    <!-- Card 2 -->
+                    <div class="why-card">
+                        <canvas id="whyCanvas2" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">INNOVATION.</h3>
+                            <p class="why-card-desc">Build the future of<br>decentralized tech.</p>
+                            <span class="why-card-num">02</span>
+                        </div>
+                    </div>
+                    <!-- Card 3 -->
+                    <div class="why-card">
+                        <canvas id="whyCanvas3" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">COMMUNITY.</h3>
+                            <p class="why-card-desc">Join a vibrant ecosystem<br>of creators.</p>
+                            <span class="why-card-num">03</span>
+                        </div>
+                    </div>
+                    <!-- Card 4 -->
+                    <div class="why-card">
+                        <canvas id="whyCanvas4" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">SCALABILITY.</h3>
+                            <p class="why-card-desc">Grow your operations<br>without friction.</p>
+                            <span class="why-card-num">04</span>
+                        </div>
+                    </div>
+                    <!-- Card 5 -->
+                    <div class="why-card">
+                        <canvas id="whyCanvas5" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">SECURITY.</h3>
+                            <p class="why-card-desc">Enterprise-grade protection<br>built in.</p>
+                            <span class="why-card-num">05</span>
+                        </div>
+                    </div>
+                    <!-- Card 6 -->
+                    <div class="why-card">
+                        <canvas id="whyCanvas6" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">EFFICIENCY.</h3>
+                            <p class="why-card-desc">Streamline processes<br>automatically.</p>
+                            <span class="why-card-num">06</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 5: Events -->
+        <section class="events-section">
+            <div class="events-container">
+                <!-- Top Row: 3 Rectangles -->
+                <div class="events-row">
+                    <div class="why-card">
+                        <canvas id="eventsCanvas1" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">EVENT 1.</h3>
+                            <p class="why-card-desc">Description for event 1<br>goes here.</p>
+                            <span class="why-card-num">01</span>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <canvas id="eventsCanvas2" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">EVENT 2.</h3>
+                            <p class="why-card-desc">Description for event 2<br>goes here.</p>
+                            <span class="why-card-num">02</span>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <canvas id="eventsCanvas3" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">EVENT 3.</h3>
+                            <p class="why-card-desc">Description for event 3<br>goes here.</p>
+                            <span class="why-card-num">03</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Middle Header -->
+                <div class="events-header">
+                    <canvas id="eventsHeaderLeft" class="events-header-canvas"></canvas>
+                    <h2>EVENTS</h2>
+                    <canvas id="eventsHeaderRight" class="events-header-canvas"></canvas>
+                </div>
+
+                <!-- Bottom Row: 3 Rectangles -->
+                <div class="events-row">
+                    <div class="why-card">
+                        <canvas id="eventsCanvas4" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">EVENT 4.</h3>
+                            <p class="why-card-desc">Description for event 4<br>goes here.</p>
+                            <span class="why-card-num">04</span>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <canvas id="eventsCanvas5" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">EVENT 5.</h3>
+                            <p class="why-card-desc">Description for event 5<br>goes here.</p>
+                            <span class="why-card-num">05</span>
+                        </div>
+                    </div>
+                    <div class="why-card">
+                        <canvas id="eventsCanvas6" class="why-canvas"></canvas>
+                        <div class="why-card-content">
+                            <h3 class="why-card-title">EVENT 6.</h3>
+                            <p class="why-card-desc">Description for event 6<br>goes here.</p>
+                            <span class="why-card-num">06</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 6: Blogs & News -->
+        <section class="media-section">
+            <div class="media-container">
+                
+                <!-- Blogs Area -->
+                <div class="media-area blogs-area">
+                    <h2 class="media-title left-title">Blogs</h2>
+                    <div class="carousel-container">
+                        <button class="carousel-btn prev-btn">&lt;</button>
+                        <div class="carousel-track" id="blogs-track">
+                            <!-- Cards -->
+                            <div class="media-card">
+                                <div class="card-left image-placeholder"><img src="https://picsum.photos/seed/blog1/400/400" alt="Blog Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <div class="card-right geo-text blogs-geo">
+                                    <canvas id="blogsCanvas1" class="media-canvas"></canvas>
+                                    <div class="media-text-content blogs-content">
+                                        <h3>The Future of AI</h3>
+                                        <p>Discover how artificial intelligence is reshaping the modern workplace and creating new opportunities for growth.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media-card">
+                                <div class="card-left image-placeholder"><img src="https://picsum.photos/seed/blog2/400/400" alt="Blog Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <div class="card-right geo-text blogs-geo">
+                                    <canvas id="blogsCanvas2" class="media-canvas"></canvas>
+                                    <div class="media-text-content blogs-content">
+                                        <h3>Sustainable Design</h3>
+                                        <p>Learn why eco-friendly architecture and sustainable materials are becoming the new standard in building design.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media-card">
+                                <div class="card-left image-placeholder"><img src="https://picsum.photos/seed/blog3/400/400" alt="Blog Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <div class="card-right geo-text blogs-geo">
+                                    <canvas id="blogsCanvas3" class="media-canvas"></canvas>
+                                    <div class="media-text-content blogs-content">
+                                        <h3>Creative Workflows</h3>
+                                        <p>Maximize your team's productivity with our proven strategies for streamlining creative digital workflows.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media-card">
+                                <div class="card-left image-placeholder"><img src="https://picsum.photos/seed/blog4/400/400" alt="Blog Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <div class="card-right geo-text blogs-geo">
+                                    <canvas id="blogsCanvas4" class="media-canvas"></canvas>
+                                    <div class="media-text-content blogs-content">
+                                        <h3>Mastering Typography</h3>
+                                        <p>Explore the psychological impact of font choices and how typography defines a brand's visual identity.</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="media-card">
+                                <div class="card-left image-placeholder"><img src="https://picsum.photos/seed/blog5/400/400" alt="Blog Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                                <div class="card-right geo-text blogs-geo">
+                                    <canvas id="blogsCanvas5" class="media-canvas"></canvas>
+                                    <div class="media-text-content blogs-content">
+                                        <h3>Brand Evolution</h3>
+                                        <p>A comprehensive guide on when and how to successfully rebrand your business for the modern era.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="carousel-btn next-btn">&gt;</button>
+                    </div>
+                </div>
+
+                <!-- News Area -->
+                <div class="media-area news-area">
+                    <h2 class="media-title right-title">News</h2>
+                    <div class="carousel-container">
+                        <button class="carousel-btn prev-btn">&lt;</button>
+                        <div class="carousel-track" id="news-track">
+                            <!-- Cards -->
+                            <div class="media-card">
+                                <div class="card-left geo-text news-geo">
+                                    <canvas id="newsCanvas1" class="media-canvas"></canvas>
+                                    <div class="media-text-content news-content">
+                                        <h3>MATRI6 Launched</h3>
+                                        <p>We are thrilled to announce the official launch of our new digital design agency, bringing innovative solutions to modern brands.</p>
+                                    </div>
+                                </div>
+                                <div class="card-right image-placeholder"><img src="https://picsum.photos/seed/news1/400/400" alt="News Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                            </div>
+                            <div class="media-card">
+                                <div class="card-left geo-text news-geo">
+                                    <canvas id="newsCanvas2" class="media-canvas"></canvas>
+                                    <div class="media-text-content news-content">
+                                        <h3>Award Winning Design</h3>
+                                        <p>Our team recently took home the gold at the International Web Design Awards for our work on the Eco-Future project.</p>
+                                    </div>
+                                </div>
+                                <div class="card-right image-placeholder"><img src="https://picsum.photos/seed/news2/400/400" alt="News Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                            </div>
+                            <div class="media-card">
+                                <div class="card-left geo-text news-geo">
+                                    <canvas id="newsCanvas3" class="media-canvas"></canvas>
+                                    <div class="media-text-content news-content">
+                                        <h3>New Office Opening</h3>
+                                        <p>Expanding our global footprint with a brand new studio space right in the heart of downtown Berlin.</p>
+                                    </div>
+                                </div>
+                                <div class="card-right image-placeholder"><img src="https://picsum.photos/seed/news3/400/400" alt="News Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                            </div>
+                            <div class="media-card">
+                                <div class="card-left geo-text news-geo">
+                                    <canvas id="newsCanvas4" class="media-canvas"></canvas>
+                                    <div class="media-text-content news-content">
+                                        <h3>Tech Conference 2026</h3>
+                                        <p>Join us this fall where our lead designer will be speaking about the intersection of art and algorithm.</p>
+                                    </div>
+                                </div>
+                                <div class="card-right image-placeholder"><img src="https://picsum.photos/seed/news4/400/400" alt="News Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                            </div>
+                            <div class="media-card">
+                                <div class="card-left geo-text news-geo">
+                                    <canvas id="newsCanvas5" class="media-canvas"></canvas>
+                                    <div class="media-text-content news-content">
+                                        <h3>Partnership Announcement</h3>
+                                        <p>We are excited to partner with GlobalTech to bring cutting-edge UX/UI frameworks to startups worldwide.</p>
+                                    </div>
+                                </div>
+                                <div class="card-right image-placeholder"><img src="https://picsum.photos/seed/news5/400/400" alt="News Image" style="width:100%; height:100%; object-fit:cover;"></div>
+                            </div>
+                        </div>
+                        <button class="carousel-btn next-btn">&gt;</button>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- Section 7: FAQs & Insights -->
+        <section class="faq-section">
+            <div class="faq-container">
+                
+                <!-- Left Column -->
+                <div class="faq-left">
+                    <div class="faq-tab active" data-target="faq-list">
+                        <h2 class="faq-tab-title">FAQS</h2>
+                        <p class="faq-tab-subtitle">FREQUENTLY ASKED QUESTIONS</p>
+                    </div>
+                    <div class="faq-tab" data-target="insights-list">
+                        <h2 class="faq-tab-title">INSIGHTS</h2>
+                        <p class="faq-tab-subtitle">EXTREMELY RARELY ASKED QUESTIONS</p>
+                    </div>
+                </div>
+
+                <!-- Right Column -->
+                <div class="faq-right">
+                    
+                    <!-- FAQs List -->
+                    <div class="faq-list-container active" id="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">01</span>
+                                <span class="faq-text">WE'VE ALREADY POSTED ON LINKEDIN - IT DIDN'T HELP. WHY SHOULD IT BE ANY DIFFERENT NOW?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">02</span>
+                                <span class="faq-text">HOW QUICKLY WILL WE SEE RESULTS?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">03</span>
+                                <span class="faq-text">HOW MUCH TIME DO WE NEED TO INVEST?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">04</span>
+                                <span class="faq-text">WE ALREADY HAVE A MARKETING TEAM. DO WE STILL NEED YOU?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">05</span>
+                                <span class="faq-text">HOW CAN WE ENVISION WORKING WITH YOU?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">06</span>
+                                <span class="faq-text">WHAT INVESTMENT CAN WE EXPECT?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">07</span>
+                                <span class="faq-text">ARE YOU COMING TO JOIN US TOO?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">08</span>
+                                <span class="faq-text">WHEN DO WE START?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Insights List -->
+                    <div class="faq-list-container" id="insights-list">
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">01</span>
+                                <span class="faq-text">GIN AND TONIC OR WINE.</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">02</span>
+                                <span class="faq-text">DO YOU ALWAYS LOOK THIS GOOD?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">03</span>
+                                <span class="faq-text">IF YOU COULD PUT A ZOO ANIMAL IN YOUR GARDEN, WHICH ONE WOULD IT BE?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                        <div class="faq-item">
+                            <div class="faq-header">
+                                <span class="faq-num">04</span>
+                                <span class="faq-text">WHAT IS YOUR FAVORITE WORD?</span>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-body">
+                                <p>I work with a maximum of three companies per quarter. From April 2025 onwards, my capacity will be limited.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Section 8: Join MATRI6 -->
+        <section class="contact-section">
+            <div class="contact-container">
+                <div class="contact-header">
+                    <h2>JOIN MATRI6</h2>
+                </div>
+                <div class="contact-content">
+                    
+                    <!-- Left: Form -->
+                    <div class="contact-left">
+                        <form class="contact-form" action="#" method="POST">
+                            <div class="form-grid">
+                                <input type="text" name="first_name" placeholder="First name*" required>
+                                <input type="text" name="last_name" placeholder="Name*" required>
+                                <input type="tel" name="phone" placeholder="Phone*" required>
+                                <input type="email" name="email" placeholder="E-mail*" required>
+                            </div>
+                            <textarea name="project_details" placeholder="Tell me about your project:*" required></textarea>
+                            <p class="privacy-text">By clicking on "Say Hello," you are accepting my <a href="#">privacy policy</a> .</p>
+                            <button type="submit" class="submit-btn">SAY HELLO.</button>
+                        </form>
+                    </div>
+
+                    <!-- Right: Info -->
+                    <div class="contact-right">
+                        <div class="about-us">
+                            <h3>About Us</h3>
+                            <p>We are a leading digital design agency focused on bringing cutting-edge technology and aesthetic brilliance to modern brands. We work with forward-thinking clients who aren't afraid to push boundaries.</p>
+                        </div>
+                        <div class="contact-footer">
+                            <div class="contact-info">
+                                <a href="mailto:hello@matri6.com" class="contact-email">hello@matri6.com</a>
+                                <div class="social-links">
+                                    <a href="#">LinkedIn</a>
+                                    <a href="#">Twitter</a>
+                                    <a href="#">Instagram</a>
+                                </div>
+                            </div>
+                            <div class="quick-links">
+                                <h3>Quick Links</h3>
+                                <ul>
+                                    <li><a href="#">Home</a></li>
+                                    <li><a href="#">Vision</a></li>
+                                    <li><a href="#">Ecosystem</a></li>
+                                    <li><a href="#">Why MATRI6</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>
