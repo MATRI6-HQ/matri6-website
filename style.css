@@ -74,17 +74,17 @@ section {
 */
 #main-header {
     position: fixed;
-    top: 2vh;
+    top: 4vh;
     left: 50%;
     transform: translateX(-50%);
     width: 95vw;
     z-index: 100;
     
-    font-family: 'Futura', sans-serif;
-    font-weight: bold;
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
     font-size: clamp(3rem, 10vw, 14rem);
     text-transform: uppercase;
-    line-height: 0.8;
+    line-height: 1;
     
     /* Mix blend mode for dynamic color contrast */
     color: white; 
@@ -146,7 +146,7 @@ section {
     width: 100%;
     height: clamp(2.4rem, 8vw, 11.2rem);
     margin-bottom: 1rem;
-    margin-top: 2vh;
+    margin-top: 4vh;
 }
 
 .brand-subtitle {
@@ -210,6 +210,7 @@ section {
 /* Marquee Strip */
 .marquee-strip {
     margin-top: auto; /* Pushes it down below the grid exactly where the quote was */
+    margin-bottom: 2vh; /* Moves the marquee up slightly so it doesn't get cut */
     width: 100vw; /* Stretch across the entire screen */
     background-color: var(--primary-bg);
     padding: 3vh 0; /* Increased to make it taller */
@@ -241,7 +242,7 @@ section {
 
 .ecosystem-container {
     width: 95vw;
-    height: 95vh;
+    flex: 1;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -256,24 +257,15 @@ section {
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     margin-bottom: 12vh;
+    font-size: clamp(2rem, 5vw, 5rem);
 }
 
 .eco-art-container {
     flex: 1;
-    height: clamp(1.5rem, 4vw, 4rem);
+    height: 0.75em; /* Scaled perfectly to the text cap-height */
     background-color: transparent; /* Use transparent to let the canvas background show */
     overflow: hidden;
     border-radius: 0 !important;
-    border-top: 1px solid rgba(32, 33, 35, 0.4);
-    border-bottom: 1px solid rgba(32, 33, 35, 0.4);
-}
-
-.eco-art-container:first-child {
-    border-right: 1px solid rgba(32, 33, 35, 0.4);
-}
-
-.eco-art-container:last-child {
-    border-left: 1px solid rgba(32, 33, 35, 0.4);
 }
 
 #ecoGeoCanvasLeft, #ecoGeoCanvasRight {
@@ -284,7 +276,7 @@ section {
 
 .ecosystem-title {
     font-family: 'Space Grotesk', sans-serif;
-    font-size: clamp(2rem, 5vw, 5rem);
+    font-size: inherit;
     text-transform: uppercase;
     font-weight: 900;
     margin-bottom: 0;
@@ -310,6 +302,17 @@ section {
     font-weight: bold;
     text-transform: uppercase;
     justify-self: start; /* Shrinks the hit area to just the text */
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+    transform-origin: left;
+}
+
+.grid-item:hover {
+    transform: scale(1.05);
+    color: #202123;
 }
 
 .grid-item.mixed-case {
@@ -319,6 +322,7 @@ section {
 .grid-item.right-align {
     text-align: right;
     justify-self: end; /* Shrinks the hit area to just the text on the right side */
+    transform-origin: right;
 }
 
 
@@ -368,14 +372,15 @@ section {
     
     .ecosystem-title-wrapper {
         margin-bottom: 2vh; /* Less margin on mobile since space-evenly takes over */
+        font-size: clamp(2.8rem, 8vw, 4rem); /* Increase heading size on mobile */
     }
     
     #main-header {
-        top: 6vh; /* Give the header more breathing room at the top on mobile */
+        top: 8vh; /* Give the header more breathing room at the top on mobile */
     }
     
     .title-placeholder {
-        margin-top: 6vh; /* Ensure the art is pushed down correspondingly */
+        margin-top: 8vh; /* Ensure the art is pushed down correspondingly */
     }
 }
 
