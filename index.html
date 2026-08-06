@@ -34,7 +34,7 @@
         </section>
 
         <!-- Section 2: The Ecosystem -->
-        <section class="ecosystem-section" style="background-color: #ff6c3d;">
+        <section id="ecosystem" class="ecosystem-section" style="background-color: #ff6c3d;">
             <div class="ecosystem-container">
                 <div class="ecosystem-title-wrapper">
                     <div class="eco-art-container">
@@ -46,16 +46,16 @@
                     </div>
                 </div>
                 <div class="ecosystem-grid">
-                    <a href="#" class="grid-item" data-image="https://picsum.photos/seed/ai/400/400">AI PRODUCTS</a>
-                    <a href="#" class="grid-item right-align" data-image="https://picsum.photos/seed/commune/400/400">
+                    <a href="#ecosystem" class="grid-item" data-image="https://picsum.photos/seed/ai/400/400">AI PRODUCTS</a>
+                    <a href="#ecosystem" class="grid-item right-align" data-image="https://picsum.photos/seed/commune/400/400">
                         COMMUNE</a>
-                    <a href="#" class="grid-item" data-image="https://picsum.photos/seed/venture/400/400">VENTURE
+                    <a href="#ecosystem" class="grid-item" data-image="https://picsum.photos/seed/venture/400/400">VENTURE
                         NETWORK</a>
-                    <a href="#" class="grid-item right-align" data-image="https://picsum.photos/seed/hackathon/400/400">
+                    <a href="#ecosystem" class="grid-item right-align" data-image="https://picsum.photos/seed/hackathon/400/400">
                         HACKATHONS</a>
-                    <a href="#" class="grid-item" data-image="https://picsum.photos/seed/launchpad/400/400">LAUNCHPAD
+                    <a href="#ecosystem" class="grid-item" data-image="https://picsum.photos/seed/launchpad/400/400">LAUNCHPAD
                     </a>
-                    <a href="#" class="grid-item right-align"
+                    <a href="#ecosystem" class="grid-item right-align"
                         data-image="https://picsum.photos/seed/academy/400/400">ACADEMY
                     </a>
                 </div>
@@ -183,84 +183,96 @@
                 </div>
             </div>
         </section>
-        <!-- Section 5: Events -->
+        <!--
+< ! - - Section 5: Events - - >
         <section class="events-section">
             <div class="events-container">
-                <!-- Top Row: 3 Rectangles -->
-                <div class="events-row">
-                    <div class="why-card">
-                        <canvas id="eventsCanvas1" class="why-canvas"></canvas>
-                        <div class="why-card-content">
-                            <h3 class="why-card-title">EVENT 1.</h3>
-                            <p class="why-card-desc">Description for event 1<br>goes here.</p>
-                            <span class="why-card-num">01</span>
-                        </div>
+                < ! - - Row 1 - - >
+                <div class="event-card">
+                    <img src="https://picsum.photos/seed/ev1/600/400" alt="Event" class="event-bg">
+                    <div class="event-info">
+                        <h3>AI SYMPOSIUM</h3>
+                        <p>Oct 12, 2026</p>
                     </div>
-                    <div class="why-card">
-                        <canvas id="eventsCanvas2" class="why-canvas"></canvas>
-                        <div class="why-card-content">
-                            <h3 class="why-card-title">EVENT 2.</h3>
-                            <p class="why-card-desc">Description for event 2<br>goes here.</p>
-                            <span class="why-card-num">02</span>
-                        </div>
+                </div>
+                <div class="event-card">
+                    <img src="https://picsum.photos/seed/ev2/600/400" alt="Event" class="event-bg">
+                    <div class="event-info">
+                        <h3>DESIGN WEEK</h3>
+                        <p>Nov 04, 2026</p>
                     </div>
-                    <div class="why-card">
-                        <canvas id="eventsCanvas3" class="why-canvas"></canvas>
-                        <div class="why-card-content">
-                            <h3 class="why-card-title">EVENT 3.</h3>
-                            <p class="why-card-desc">Description for event 3<br>goes here.</p>
-                            <span class="why-card-num">03</span>
-                        </div>
+                </div>
+                <div class="event-card">
+                    <img src="https://picsum.photos/seed/ev3/600/400" alt="Event" class="event-bg">
+                    <div class="event-info">
+                        <h3>STARTUP PITCH</h3>
+                        <p>Dec 01, 2026</p>
                     </div>
                 </div>
 
-                <!-- Middle Header -->
-                <div class="events-header">
-                    <canvas id="eventsHeaderLeft" class="events-header-canvas"></canvas>
+                < ! - - Row 2 - - >
+                <div class="event-card">
+                    <img src="https://picsum.photos/seed/ev4/600/400" alt="Event" class="event-bg">
+                    <div class="event-info">
+                        <h3>WEB3 SUMMIT</h3>
+                        <p>Jan 15, 2027</p>
+                    </div>
+                </div>
+                <div class="events-title-center">
+                    <div class="events-art-container">
+                        <canvas id="eventsGeoCanvasLeft"></canvas>
+                    </div>
                     <h2>EVENTS</h2>
-                    <canvas id="eventsHeaderRight" class="events-header-canvas"></canvas>
+                    <div class="events-art-container">
+                        <canvas id="eventsGeoCanvasRight"></canvas>
+                    </div>
+                </div>
+                <div class="event-card">
+                    <img src="https://picsum.photos/seed/ev5/600/400" alt="Event" class="event-bg">
+                    <div class="event-info">
+                        <h3>FOUNDERS MEET</h3>
+                        <p>Feb 20, 2027</p>
+                    </div>
                 </div>
 
-                <!-- Bottom Row: 3 Rectangles -->
-                <div class="events-row">
-                    <div class="why-card">
-                        <canvas id="eventsCanvas4" class="why-canvas"></canvas>
-                        <div class="why-card-content">
-                            <h3 class="why-card-title">EVENT 4.</h3>
-                            <p class="why-card-desc">Description for event 4<br>goes here.</p>
-                            <span class="why-card-num">04</span>
-                        </div>
+                < ! - - Row 3 - - >
+                <div class="event-card">
+                    <img src="https://picsum.photos/seed/ev6/600/400" alt="Event" class="event-bg">
+                    <div class="event-info">
+                        <h3>ROBOTICS EXPO</h3>
+                        <p>Mar 10, 2027</p>
                     </div>
-                    <div class="why-card">
-                        <canvas id="eventsCanvas5" class="why-canvas"></canvas>
-                        <div class="why-card-content">
-                            <h3 class="why-card-title">EVENT 5.</h3>
-                            <p class="why-card-desc">Description for event 5<br>goes here.</p>
-                            <span class="why-card-num">05</span>
-                        </div>
+                </div>
+                <div class="event-card">
+                    <img src="https://picsum.photos/seed/ev7/600/400" alt="Event" class="event-bg">
+                    <div class="event-info">
+                        <h3>UI/UX MASTERCLASS</h3>
+                        <p>Apr 05, 2027</p>
                     </div>
-                    <div class="why-card">
-                        <canvas id="eventsCanvas6" class="why-canvas"></canvas>
-                        <div class="why-card-content">
-                            <h3 class="why-card-title">EVENT 6.</h3>
-                            <p class="why-card-desc">Description for event 6<br>goes here.</p>
-                            <span class="why-card-num">06</span>
-                        </div>
+                </div>
+                <div class="event-card">
+                    <img src="https://picsum.photos/seed/ev8/600/400" alt="Event" class="event-bg">
+                    <div class="event-info">
+                        <h3>DEV HACKATHON</h3>
+                        <p>May 22, 2027</p>
                     </div>
                 </div>
             </div>
         </section>
-        <!-- Section 6: Blogs & News -->
+        
+-->
+<!--
+< ! - - Section 6: Blogs & News - - >
         <section class="media-section">
             <div class="media-container">
 
-                <!-- Blogs Area -->
+                < ! - - Blogs Area - - >
                 <div class="media-area blogs-area">
                     <h2 class="media-title left-title">Blogs</h2>
                     <div class="carousel-container">
                         <button class="carousel-btn prev-btn">&lt;</button>
                         <div class="carousel-track" id="blogs-track">
-                            <!-- Cards -->
+                            < ! - - Cards - - >
                             <div class="media-card">
                                 <div class="card-left image-placeholder"><img
                                         src="https://picsum.photos/seed/blog1/400/400" alt="Blog Image"
@@ -331,13 +343,13 @@
                     </div>
                 </div>
 
-                <!-- News Area -->
+                < ! - - News Area - - >
                 <div class="media-area news-area">
                     <h2 class="media-title right-title">News</h2>
                     <div class="carousel-container">
                         <button class="carousel-btn prev-btn">&lt;</button>
                         <div class="carousel-track" id="news-track">
-                            <!-- Cards -->
+                            < ! - - Cards - - >
                             <div class="media-card">
                                 <div class="card-left geo-text news-geo">
                                     <canvas id="newsCanvas1" class="media-canvas"></canvas>
@@ -410,7 +422,9 @@
 
             </div>
         </section>
-        <!-- Section 7: FAQs & Insights -->
+        
+-->
+<!-- Section 7: FAQs & Insights -->
         <section class="faq-section">
             <div class="faq-container">
 
@@ -420,10 +434,10 @@
                         <h2 class="faq-tab-title">FAQS</h2>
                         <p class="faq-tab-subtitle">FREQUENTLY ASKED QUESTIONS</p>
                     </div>
-                    <div class="faq-tab" data-target="insights-list">
+                    <!-- <div class="faq-tab" data-target="insights-list">
                         <h2 class="faq-tab-title">INSIGHTS</h2>
                         <p class="faq-tab-subtitle">EXTREMELY RARELY ASKED QUESTIONS</p>
-                    </div>
+                    </div> -->
                 </div>
 
                 <!-- Right Column -->
@@ -522,7 +536,8 @@
                         </div>
                     </div>
 
-                    <!-- Insights List -->
+                    <!--
+< ! - - Insights List - - >
                     <div class="faq-list-container" id="insights-list">
                         <div class="faq-item">
                             <div class="faq-header">
@@ -570,36 +585,26 @@
                             </div>
                         </div>
                     </div>
+-->
                 </div>
             </div>
         </section>
         <!-- Section 8: Join MATRI6 -->
         <section class="contact-section">
             <div class="contact-container">
-                <div class="contact-header">
-                    <h2>JOIN MATRI6</h2>
+                <div class="ecosystem-title-wrapper contact-title-wrapper">
+                    <div class="eco-art-container">
+                        <canvas id="contactGeoCanvasLeft"></canvas>
+                    </div>
+                    <h2 class="ecosystem-title" style="color: #ffffff;">JOIN MATRI6</h2>
+                    <div class="eco-art-container">
+                        <canvas id="contactGeoCanvasRight"></canvas>
+                    </div>
                 </div>
                 <div class="contact-content">
 
-                    <!-- Left: Form -->
+                    <!-- Left: Info -->
                     <div class="contact-left">
-                        <form class="contact-form" action="#" method="POST">
-                            <div class="form-grid">
-                                <input type="text" name="first_name" placeholder="First name*" required>
-                                <input type="text" name="last_name" placeholder="Name*" required>
-                                <input type="tel" name="phone" placeholder="Phone*" required>
-                                <input type="email" name="email" placeholder="E-mail*" required>
-                            </div>
-                            <textarea name="project_details" placeholder="Tell me about your project:*"
-                                required></textarea>
-                            <p class="privacy-text">By clicking on "Say Hello," you are accepting my <a href="#">privacy
-                                    policy</a> .</p>
-                            <button type="submit" class="submit-btn">SAY HELLO.</button>
-                        </form>
-                    </div>
-
-                    <!-- Right: Info -->
-                    <div class="contact-right">
                         <div class="about-us">
                             <h3>About Us</h3>
                             <p>We are a leading digital design agency focused on bringing cutting-edge technology and
@@ -625,6 +630,23 @@
                                 </ul>
                             </div>
                         </div>
+                    </div>
+
+                    <!-- Right: Form -->
+                    <div class="contact-right">
+                        <form class="contact-form" action="#" method="POST">
+                            <div class="form-grid">
+                                <input type="text" name="first_name" placeholder="First name*" required>
+                                <input type="text" name="last_name" placeholder="Name*" required>
+                                <input type="tel" name="phone" placeholder="Phone*" required>
+                                <input type="email" name="email" placeholder="E-mail*" required>
+                            </div>
+                            <textarea name="project_details" placeholder="Tell me about your project:*"
+                                required></textarea>
+                            <p class="privacy-text">By clicking on "Say Hello," you are accepting my <a href="#">privacy
+                                    policy</a> .</p>
+                            <button type="submit" class="submit-btn">SAY HELLO.</button>
+                        </form>
                     </div>
                 </div>
             </div>

@@ -15,46 +15,47 @@
     box-sizing: border-box;
 }
 
-body, html {
-    width: 100%;
-    height: 100%;
+html {
+}
+
+body {
+    width: 100vw;
+    overflow-x: hidden;
     font-family: 'Futura', sans-serif;
     background-color: var(--primary-bg);
     color: var(--secondary-black);
-    overflow: hidden; /* Prevent body scrolling, we scroll the container */
 }
 
 /* Scroll Snapping Container */
 .scroll-container {
     width: 100%;
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory;
-    scroll-behavior: smooth;
-    
-    /* Hide scrollbar for clean look */
-    scrollbar-width: none; /* Firefox */
-}
-.scroll-container::-webkit-scrollbar {
-    display: none; /* Chrome/Safari */
 }
 
 section {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     position: relative;
     padding: 2rem;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 1rem;
+    }
 }
 
 /* Landing Page Specific */
 .landing-page {
     text-align: center;
+    padding: 0;
 }
 
 .content-wrapper {
@@ -195,9 +196,11 @@ section {
 /* Ecosystem Section (Section 2) */
 .ecosystem-section {
     width: 100%;
+    padding: 0;
     height: 100vh;
+    height: 100dvh;
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -254,6 +257,7 @@ section {
     display: flex;
     align-items: center;
     width: 100vw;
+    flex-shrink: 0;
     margin-left: calc(-50vw + 50%);
     margin-right: calc(-50vw + 50%);
     margin-bottom: 12vh;
@@ -388,8 +392,9 @@ section {
 .vision-section {
     width: 100%;
     height: 100vh;
+    height: 100dvh;
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -578,13 +583,13 @@ section {
 .why-section {
     width: 100%;
     height: 100vh;
-    min-height: 800px;
+    height: 100dvh;
     background-color: #fed648;
     display: flex;
     justify-content: center;
     align-items: center;
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
 }
 
 .why-container {
@@ -698,24 +703,81 @@ section {
 
 /* Mobile Responsiveness for Section 4 */
 @media (max-width: 900px) {
-    .why-cards-wrapper {
-        grid-template-columns: 1fr;
-        gap: 2vh;
+    .why-container {
+        width: 100vw;
+        padding: 12vh 0 0 0; /* Space for the main MATRI6 fixed logo */
+        justify-content: flex-start;
+    }
+    
+    .why-header {
+        margin-bottom: 2vh;
+        padding: 0 5vw;
+        flex-direction: column;
     }
     
     .why-header h2 {
         max-width: 100%;
+        text-align: center;
+        font-size: clamp(2.5rem, 8vw, 4rem);
     }
     
-    .why-section {
-        height: auto;
-        min-height: 100vh;
-        padding-top: 10vh;
-        padding-bottom: 10vh;
+    .why-title-art {
+        display: none; /* Hide the art line to keep the heading clean below the logo */
+    }
+    
+    .why-cards-wrapper {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5vh;
+        width: 100%;
+        flex: 1;
+        padding: 0 4vw 2vh 4vw; /* Aesthetic padding */
+        overflow: hidden; /* Squeezed to fit, no scroll */
     }
     
     .why-card {
-        aspect-ratio: 16 / 9;
+        aspect-ratio: auto;
+        min-height: 0;
+        height: clamp(8vh, 10vh, 12vh); /* Squeeze into screen */
+        border: none;
+        border-radius: 12px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.1); /* Aesthetic shadow */
+    }
+
+    .why-card-content {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        grid-template-rows: auto auto;
+        padding: 1vh 4vw;
+        height: 100%;
+        align-content: center;
+        row-gap: 2px;
+    }
+
+    .why-card-title {
+        grid-column: 1;
+        grid-row: 1;
+        font-size: clamp(1rem, 3.5vw, 1.3rem);
+        margin: 0;
+        align-self: flex-end;
+    }
+
+    .why-card-desc {
+        grid-column: 1;
+        grid-row: 2;
+        font-size: clamp(0.7rem, 2.5vw, 0.9rem);
+        margin: 0;
+        align-self: flex-start;
+        line-height: 1.2;
+    }
+
+    .why-card-num {
+        grid-column: 2;
+        grid-row: 1 / 3;
+        position: static;
+        font-size: clamp(2rem, 7vw, 3rem);
+        align-self: center;
+        line-height: 1;
     }
 }
 
@@ -734,48 +796,98 @@ section {
 
 .events-container {
     width: 90%;
-    height: 90%;
+    height: 80%; /* Reduced from 90% to give more breathing room */
+    margin-top: 10vh; /* Pushes the grid down to clear the fixed MATRI6 logo */
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 2vw;
+}
+
+.event-card {
+    position: relative;
+    overflow: hidden;
+    border-radius: 4px; /* Slight rounding for aesthetics */
+    background-color: #000;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(0,0,0,0);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.event-card:hover {
+    box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+    transform: translateY(-5px);
+}
+
+.event-bg {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    object-fit: cover;
+    z-index: 1;
+    opacity: 0.7;
+    transition: transform 0.5s ease, opacity 0.3s ease;
+}
+
+.event-card:hover .event-bg {
+    transform: scale(1.08);
+    opacity: 0.9;
+}
+
+.event-info {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    padding: 1.5vw;
+    z-index: 2;
+    background: linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%);
+    color: #fff;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: flex-end;
 }
 
-.events-row {
-    display: flex;
-    justify-content: space-between;
-    gap: 2vw;
-    height: 40%;
+.event-info h3 {
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: clamp(1rem, 2vw, 1.8rem);
+    margin: 0 0 0.5vh 0;
+    text-transform: uppercase;
 }
 
-.events-header {
+.event-info p {
+    font-family: 'Courier New', Courier, monospace;
+    font-size: clamp(0.8rem, 1vw, 1rem);
+    margin: 0;
+    color: #ff6c3d; /* Accent color for the date */
+}
+
+.events-title-center {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 20%;
-    width: 100%;
     gap: 2vw;
 }
 
-.events-header-canvas {
+.events-art-container {
     flex: 1;
     height: clamp(2rem, 5vw, 5rem);
     background-color: transparent;
+    display: none; /* Hidden on desktop */
 }
 
-.events-header h2 {
+.events-art-container canvas {
+    width: 100%;
+    height: 100%;
+}
+
+.events-title-center h2 {
     font-family: 'Space Grotesk', sans-serif;
     font-size: clamp(3rem, 6vw, 6rem);
-    color: #202123; /* Black text */
+    color: #202123;
     margin: 0;
     font-weight: 900;
     text-transform: uppercase;
     letter-spacing: -0.02em;
-    flex-shrink: 0;
-}
-
-/* Re-using .why-card from Why Section, but ensuring it fits nicely */
-.events-row .why-card {
-    height: 100%;
 }
 
 /* ==========================================================================
@@ -784,13 +896,13 @@ section {
 .media-section {
     width: 100%;
     height: 100vh;
-    min-height: 800px;
+    height: 100dvh;
     background-color: #fca5a6; /* Pink */
     display: flex;
     justify-content: center;
     align-items: center;
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
 }
 
 .media-container {
@@ -963,13 +1075,13 @@ section {
 .faq-section {
     width: 100%;
     height: 100vh;
-    min-height: 800px;
-    background-color: #d4b8ff; /* Light purple */
+    height: 100dvh;
+    background-color: #0fb981;
     display: flex;
     justify-content: center;
     align-items: center;
     scroll-snap-align: start;
-    scroll-snap-stop: normal;
+    scroll-snap-stop: always;
 }
 
 .faq-container {
@@ -1152,7 +1264,8 @@ section {
    ========================================================================== */
 .contact-section {
     width: 100%;
-    min-height: 100vh;
+    height: 100vh;
+    height: 100dvh;
     background-color: #202123; /* Black background */
     display: flex;
     justify-content: center;
@@ -1160,6 +1273,8 @@ section {
     color: #ffffff;
     font-family: 'Space Grotesk', sans-serif;
     padding: 10vh 0;
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 .contact-container {
@@ -1335,4 +1450,141 @@ section {
 
 .quick-links a:hover {
     color: #ffffff;
+}
+
+/* Mobile Responsiveness for Section 5 (Events) and Section 8 (Contact) */
+@media (max-width: 900px) {
+    /* Events Mobile 2x2 Grid with Center Title */
+    .events-container {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: 1fr 1fr auto 1fr 1fr;
+        gap: 2vw;
+        height: 80%; /* Match desktop height */
+        margin-top: 10vh; /* Clear logo */
+        overflow: hidden;
+    }
+    
+    .event-card {
+        min-width: 0;
+        height: auto;
+    }
+    
+    .events-title-center {
+        grid-column: 1 / -1; /* Span both columns */
+        min-width: 0;
+        height: auto;
+        padding: 1vh 0; /* Tiny breathing room for the title */
+    }
+    
+    .events-title-center h2 {
+        font-size: clamp(2.5rem, 10vw, 4rem); /* Slightly smaller on mobile to ensure it fits */
+    }
+    
+    .events-art-container {
+        display: flex; /* Show art strips on mobile */
+    }
+    
+    /* Contact */
+    .contact-container {
+        overflow-y: auto;
+        height: 100%;
+        padding: 5vh 0;
+        gap: 2vh;
+    }
+    .contact-content {
+        flex-direction: column;
+        gap: 5vh;
+    }
+    .contact-header h2 {
+        font-size: clamp(2.5rem, 8vw, 4rem);
+    }
+}
+
+/* ==========================================================================
+   Global Responsive Breakpoints (Ultra-wide, Tablet, Short Screens)
+   ========================================================================== */
+
+/* Global Failsafe: Ensure content can scroll if screen is too short/weird aspect ratio */
+.landing-page .content-wrapper,
+.ecosystem-container,
+.vision-container,
+.events-container,
+.media-container,
+.faq-container,
+.contact-container {
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+}
+
+/* Hide scrollbars elegantly for failsafe */
+.landing-page .content-wrapper::-webkit-scrollbar,
+.ecosystem-container::-webkit-scrollbar,
+.vision-container::-webkit-scrollbar,
+.events-container::-webkit-scrollbar,
+.media-container::-webkit-scrollbar,
+.faq-container::-webkit-scrollbar,
+.contact-container::-webkit-scrollbar {
+    width: 4px;
+}
+.landing-page .content-wrapper::-webkit-scrollbar-thumb,
+.ecosystem-container::-webkit-scrollbar-thumb,
+.vision-container::-webkit-scrollbar-thumb,
+.events-container::-webkit-scrollbar-thumb,
+.media-container::-webkit-scrollbar-thumb,
+.faq-container::-webkit-scrollbar-thumb,
+.contact-container::-webkit-scrollbar-thumb {
+    background: rgba(0,0,0,0.1);
+    border-radius: 4px;
+}
+
+/* Ultra-wide Monitors */
+@media (min-width: 1441px) {
+    #main-header,
+    .content-wrapper,
+    .ecosystem-container,
+    .vision-container,
+    .why-container,
+    .events-container,
+    .media-container,
+    .faq-container,
+    .contact-container {
+        max-width: 1600px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+}
+
+/* Short Desktop / Tablet Landscape / Small Laptops */
+@media (max-height: 800px) and (min-width: 901px) {
+    .ecosystem-container {
+        padding: 5vh 0 2vh;
+        gap: 3vh 2vw;
+    }
+    .ecosystem-title {
+        font-size: clamp(2.5rem, 5vw, 3.5rem);
+    }
+    .vision-grid {
+        gap: 2vh;
+    }
+    .vision-list li {
+        margin-bottom: 0.5vh;
+    }
+    .events-header {
+        height: 15%;
+    }
+    .events-row {
+        height: 38%;
+    }
+    .contact-container {
+        padding: 5vh 0;
+        gap: 2vh;
+    }
+    .contact-header h2 {
+        font-size: clamp(3rem, 5vw, 4rem);
+    }
+    .faq-container {
+        padding: 5vh 0;
+    }
 }

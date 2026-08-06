@@ -1,3 +1,9 @@
+// Force scroll to top on refresh
+if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.scroll-container');
     const header = document.getElementById('main-header');
@@ -8,8 +14,8 @@ document.addEventListener('DOMContentLoaded', () => {
     header.setAttribute('data-section', '1');
 
     // Handle scroll animation for the header
-    container.addEventListener('scroll', () => {
-        const scrollY = container.scrollTop;
+    window.addEventListener('scroll', () => {
+        const scrollY = window.scrollY;
         const vh = window.innerHeight;
         
         // Toggle 'scrolled' class after scrolling down a bit (e.g., 50px)
@@ -241,6 +247,10 @@ document.addEventListener('DOMContentLoaded', () => {
     initGeoCanvas('ecoGeoCanvasLeft', { fixedPalette: { bg: '#ff6c3d', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
     initGeoCanvas('ecoGeoCanvasRight', { fixedPalette: { bg: '#ff6c3d', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
     
+    // Section 8 (Contact) title canvases
+    initGeoCanvas('contactGeoCanvasLeft', { fixedPalette: { bg: 'transparent', line: '#ffffff' }, tileSize: 50, linesPerTileHalf: 2 });
+    initGeoCanvas('contactGeoCanvasRight', { fixedPalette: { bg: 'transparent', line: '#ffffff' }, tileSize: 50, linesPerTileHalf: 2 });
+    
     // Why MATRI6 canvases
     initGeoCanvas('whyTitleCanvas', { fixedPalette: { bg: '#202123', line: '#fed648' }, tileSize: 50, linesPerTileHalf: 2, lineWidthRatio: 0.25 });
     initGeoCanvas('whyCanvas1', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
@@ -251,14 +261,8 @@ document.addEventListener('DOMContentLoaded', () => {
     initGeoCanvas('whyCanvas6', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
 
     // Events MATRI6 canvases
-    initGeoCanvas('eventsHeaderLeft', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
-    initGeoCanvas('eventsHeaderRight', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
-    initGeoCanvas('eventsCanvas1', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
-    initGeoCanvas('eventsCanvas2', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
-    initGeoCanvas('eventsCanvas3', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
-    initGeoCanvas('eventsCanvas4', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
-    initGeoCanvas('eventsCanvas5', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
-    initGeoCanvas('eventsCanvas6', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
+    initGeoCanvas('eventsGeoCanvasLeft', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
+    initGeoCanvas('eventsGeoCanvasRight', { fixedPalette: { bg: 'transparent', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
 
     // Blogs & News Media Canvases
     for (let i = 1; i <= 5; i++) {
@@ -282,4 +286,108 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { threshold: 0.2 }); // Trigger when 20% of the section is visible
         observer.observe(visionSection);
     }
+
+    // Strict Fullpage Scrolling (Wheel & Touch)
+    let isAnimating = false;
+    let wheelTimeout;
+    const sections = Array.from(document.querySelectorAll('section'));
+    let touchStartY = 0;
+    let touchStartX = 0;
+
+    const isScrollable = (el) => {
+        // Add a 2px tolerance to prevent subpixel fractional differences from triggering native scroll
+        const hasScrollableContent = el.scrollHeight > Math.ceil(el.clientHeight) + 2;
+        const overflowYStyle = window.getComputedStyle(el).overflowY;
+        const isOverflowHidden = overflowYStyle.indexOf('hidden') !== -1;
+        return hasScrollableContent && !isOverflowHidden;
+    };
+
+    const isScrollingInside = (target, direction) => {
+        let el = target;
+        while (el && el !== document.body && el !== document.documentElement) {
+            if (isScrollable(el)) {
+                if (direction < 0 && el.scrollTop > 0) return true;
+                if (direction > 0 && Math.ceil(el.scrollTop + el.clientHeight) < el.scrollHeight - 1) return true;
+            }
+            el = el.parentElement;
+        }
+        return false;
+    };
+
+    const handleScroll = (direction) => {
+        const currentScroll = window.scrollY;
+        let currentIndex = sections.findIndex(s => Math.abs(s.offsetTop - currentScroll) < window.innerHeight / 2);
+        
+        if (currentIndex === -1) currentIndex = 0;
+        let nextIndex = Math.max(0, Math.min(currentIndex + direction, sections.length - 1));
+
+        sections[nextIndex].scrollIntoView({
+            behavior: 'smooth',
+            block: 'start'
+        });
+    };
+
+    window.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
+
+        const direction = e.deltaY > 0 ? 1 : -1;
+        if (isScrollingInside(e.target, direction)) return;
+
+        e.preventDefault();
+        
+        // Momentum absorption: reset cooldown on every wheel event to group coasting into one scroll
+        clearTimeout(wheelTimeout);
+        wheelTimeout = setTimeout(() => {
+            isAnimating = false;
+        }, 100);
+
+        if (isAnimating) return;
+        if (Math.abs(e.deltaY) < 10) return;
+
+        isAnimating = true;
+        handleScroll(direction);
+    }, { passive: false });
+
+    window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+        touchStartX = e.touches[0].clientX;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+        if (e.touches.length > 1) return;
+        
+        const touchY = e.touches[0].clientY;
+        const touchX = e.touches[0].clientX;
+        const deltaY = touchStartY - touchY;
+        const deltaX = touchStartX - touchX;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) return;
+
+        const direction = deltaY > 0 ? 1 : -1;
+        if (isScrollingInside(e.target, direction)) return;
+
+        e.preventDefault();
+    }, { passive: false });
+
+    window.addEventListener('touchend', (e) => {
+        const touchY = e.changedTouches[0].clientY;
+        const touchX = e.changedTouches[0].clientX;
+        const deltaY = touchStartY - touchY;
+        const deltaX = touchStartX - touchX;
+
+        if (Math.abs(deltaX) > Math.abs(deltaY)) return;
+        
+        const direction = deltaY > 0 ? 1 : -1;
+        if (isScrollingInside(e.target, direction)) return;
+        
+        if (Math.abs(deltaY) < 30) return;
+        if (isAnimating) return;
+
+        isAnimating = true;
+        handleScroll(direction);
+
+        setTimeout(() => {
+            isAnimating = false;
+        }, 800);
+    }, { passive: true });
 });
