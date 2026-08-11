@@ -16,11 +16,20 @@
 }
 
 html {
+    overflow-x: hidden;
+}
+
+html.snap-page {
+    scroll-snap-type: y mandatory;
+}
+
+html.snap-page section {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
 }
 
 body {
     width: 100vw;
-    overflow-x: hidden;
     font-family: 'Futura', sans-serif;
     background-color: var(--primary-bg);
     color: var(--secondary-black);
@@ -31,12 +40,35 @@ body {
     width: 100%;
 }
 
+.sticky-wrapper {
+    height: 500vh; /* 5 product sections */
+    position: relative;
+}
+
+.overflow-hider {
+    position: sticky;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    overflow: hidden;
+}
+
+.horizontal-scroll-track {
+    display: flex;
+    width: 500vw;
+    height: 100vh;
+}
+
+.horizontal-scroll-track > section {
+    flex: 0 0 100vw;
+    height: 100vh;
+}
+
+
 section {
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -78,7 +110,8 @@ section {
     top: 4vh;
     left: 50%;
     transform: translateX(-50%);
-    width: 95vw;
+    width: 90vw;
+    max-width: 1440px;
     z-index: 100;
     
     font-family: 'Space Grotesk', sans-serif;
@@ -143,6 +176,28 @@ section {
     display: none;
 }
 
+/* Static Header (used on subpages like aiproducts.html) */
+.static-header {
+    position: fixed;
+    top: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 250px;
+    z-index: 100;
+    
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    text-transform: uppercase;
+    line-height: 1;
+    
+    color: white; 
+    
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 12px;
+}
+
 .title-placeholder {
     width: 100%;
     height: clamp(2.4rem, 8vw, 11.2rem);
@@ -199,8 +254,6 @@ section {
     padding: 0;
     height: 100vh;
     height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -393,8 +446,6 @@ section {
     width: 100%;
     height: 100vh;
     height: 100dvh;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -588,8 +639,6 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
 }
 
 .why-container {
@@ -632,7 +681,7 @@ section {
     border-top: 1px solid rgba(32, 33, 35, 0.4);
     border-bottom: 1px solid rgba(32, 33, 35, 0.4);
     border-left: 1px solid rgba(32, 33, 35, 0.4);
-    margin-right: -2.5vw; /* Extends art to the right edge of the screen */
+    margin-right: calc(-50vw + 50%); /* Extends art to the right edge of the screen */
 }
 
 .why-cards-wrapper {
@@ -901,8 +950,6 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
 }
 
 .media-container {
@@ -973,7 +1020,6 @@ section {
 .carousel-track {
     display: flex;
     overflow-x: auto;
-    scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
     gap: 2vw;
     padding: 1vh 0;
@@ -993,7 +1039,6 @@ section {
     background-color: transparent;
     border: 1px solid #202123;
     display: flex;
-    scroll-snap-align: center;
 }
 
 .card-left, .card-right {
@@ -1080,8 +1125,6 @@ section {
     display: flex;
     justify-content: center;
     align-items: center;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
 }
 
 .faq-container {
@@ -1273,8 +1316,6 @@ section {
     color: #ffffff;
     font-family: 'Space Grotesk', sans-serif;
     padding: 10vh 0;
-    scroll-snap-align: start;
-    scroll-snap-stop: always;
 }
 
 .contact-container {
@@ -1541,7 +1582,6 @@ section {
 
 /* Ultra-wide Monitors */
 @media (min-width: 1441px) {
-    #main-header,
     .content-wrapper,
     .ecosystem-container,
     .vision-container,
@@ -1586,5 +1626,38 @@ section {
     }
     .faq-container {
         padding: 5vh 0;
+    }
+}
+
+/* ==========================================================================
+   Global Responsive Layout System (Invisible Content Safe Area)
+   ========================================================================== */
+.content-wrapper,
+.ecosystem-container,
+.vision-container,
+.why-container,
+.events-container,
+.media-container,
+.faq-container,
+.contact-container {
+    width: 90vw !important;
+    max-width: 1440px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+}
+
+@media (max-width: 900px) {
+    .content-wrapper,
+    .ecosystem-container,
+    .vision-container,
+    .why-container,
+    .events-container,
+    .media-container,
+    .faq-container,
+    .contact-container {
+        width: 92vw !important;
+    }
+    #main-header {
+        width: 92vw;
     }
 }
