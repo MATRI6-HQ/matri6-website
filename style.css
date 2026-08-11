@@ -1661,3 +1661,78 @@ section {
         width: 92vw;
     }
 }
+
+/* ==========================================================================
+   Coming Soon Modal
+   ========================================================================== */
+.coming-soon-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.coming-soon-modal.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.coming-soon-content {
+    background-color: var(--secondary-black);
+    color: var(--primary-bg);
+    padding: 3rem 2rem;
+    border-radius: 16px;
+    text-align: center;
+    position: relative;
+    max-width: 90vw;
+    width: 450px;
+    border: 2px solid var(--accent-orange);
+    transform: translateY(30px);
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 20px 40px rgba(255, 119, 34, 0.15);
+}
+
+.coming-soon-modal.show .coming-soon-content {
+    transform: translateY(0);
+}
+
+.coming-soon-title {
+    font-size: 1.8rem;
+    font-family: 'Syncopate', sans-serif;
+    margin-bottom: 1rem;
+    color: var(--accent-orange);
+    letter-spacing: 1px;
+}
+
+.coming-soon-text {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: transparent;
+    border: none;
+    color: var(--primary-bg);
+    font-size: 2rem;
+    cursor: pointer;
+    transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.close-modal-btn:hover {
+    color: var(--accent-orange);
+    transform: scale(1.1);
+}
