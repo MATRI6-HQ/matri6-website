@@ -1,8 +1,3 @@
-// Force scroll to top on refresh
-if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-}
-window.scrollTo(0, 0);
 
 document.addEventListener('DOMContentLoaded', () => {
     const container = document.querySelector('.scroll-container');
@@ -10,41 +5,43 @@ document.addEventListener('DOMContentLoaded', () => {
     
     if (!container) return;
     
-    // Initialize section data attribute
-    header.setAttribute('data-section', '1');
+    if (header) {
+        // Initialize section data attribute
+        header.setAttribute('data-section', '1');
 
-    // Handle scroll animation for the header
-    window.addEventListener('scroll', () => {
-        const scrollY = window.scrollY;
-        const vh = window.innerHeight;
-        
-        // Toggle 'scrolled' class after scrolling down a bit (e.g., 50px)
-        if (scrollY > 50) {
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
-        
-        // Determine active section for line animations
-        let currentSection = 1;
-        if (scrollY > vh * 0.5 && scrollY < vh * 1.5) {
-            currentSection = 2;
-        } else if (scrollY >= vh * 1.5 && scrollY < vh * 2.5) {
-            currentSection = 3;
-        } else if (scrollY >= vh * 2.5 && scrollY < vh * 3.5) {
-            currentSection = 4;
-        } else if (scrollY >= vh * 3.5 && scrollY < vh * 4.5) {
-            currentSection = 5;
-        } else if (scrollY >= vh * 4.5 && scrollY < vh * 5.5) {
-            currentSection = 6;
-        } else if (scrollY >= vh * 5.5 && scrollY < vh * 6.5) {
-            currentSection = 7;
-        } else if (scrollY >= vh * 6.5) {
-            currentSection = 8;
-        }
-        
-        header.setAttribute('data-section', currentSection);
-    });
+        // Handle scroll animation for the header
+        window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            const vh = window.innerHeight;
+            
+            // Toggle 'scrolled' class after scrolling down a bit (e.g., 50px)
+            if (scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+            
+            // Determine active section for line animations
+            let currentSection = 1;
+            if (scrollY > vh * 0.5 && scrollY < vh * 1.5) {
+                currentSection = 2;
+            } else if (scrollY >= vh * 1.5 && scrollY < vh * 2.5) {
+                currentSection = 3;
+            } else if (scrollY >= vh * 2.5 && scrollY < vh * 3.5) {
+                currentSection = 4;
+            } else if (scrollY >= vh * 3.5 && scrollY < vh * 4.5) {
+                currentSection = 5;
+            } else if (scrollY >= vh * 4.5 && scrollY < vh * 5.5) {
+                currentSection = 6;
+            } else if (scrollY >= vh * 5.5 && scrollY < vh * 6.5) {
+                currentSection = 7;
+            } else if (scrollY >= vh * 6.5) {
+                currentSection = 8;
+            }
+            
+            header.setAttribute('data-section', currentSection);
+        });
+    }
 
     // Custom hover cursor logic for Ecosystem Grid
     const cursorImage = document.getElementById('cursor-image');
@@ -243,6 +240,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     initGeoCanvas('geoCanvas');
+    initGeoCanvas('aipGeoCanvas', { fixedPalette: { bg: '#151515', line: '#252525' } });
     initGeoCanvas('visionGeoCanvas', { fixedPalette: { bg: '#58aaf2', line: '#050505' } });
     initGeoCanvas('ecoGeoCanvasLeft', { fixedPalette: { bg: '#ff6c3d', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
     initGeoCanvas('ecoGeoCanvasRight', { fixedPalette: { bg: '#ff6c3d', line: '#202123' }, tileSize: 50, linesPerTileHalf: 2 });
@@ -287,107 +285,35 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(visionSection);
     }
 
-    // Strict Fullpage Scrolling (Wheel & Touch)
-    let isAnimating = false;
-    let wheelTimeout;
-    const sections = Array.from(document.querySelectorAll('section'));
-    let touchStartY = 0;
-    let touchStartX = 0;
-
-    const isScrollable = (el) => {
-        // Add a 2px tolerance to prevent subpixel fractional differences from triggering native scroll
-        const hasScrollableContent = el.scrollHeight > Math.ceil(el.clientHeight) + 2;
-        const overflowYStyle = window.getComputedStyle(el).overflowY;
-        const isOverflowHidden = overflowYStyle.indexOf('hidden') !== -1;
-        return hasScrollableContent && !isOverflowHidden;
-    };
-
-    const isScrollingInside = (target, direction) => {
-        let el = target;
-        while (el && el !== document.body && el !== document.documentElement) {
-            if (isScrollable(el)) {
-                if (direction < 0 && el.scrollTop > 0) return true;
-                if (direction > 0 && Math.ceil(el.scrollTop + el.clientHeight) < el.scrollHeight - 1) return true;
+    // Horizontal Scroll Track Logic (for aiproducts.html)
+    const stickyWrapper = document.querySelector('.sticky-wrapper');
+    const hTrack = document.querySelector('.horizontal-scroll-track');
+    if (stickyWrapper && hTrack) {
+        window.addEventListener('scroll', () => {
+            const rect = stickyWrapper.getBoundingClientRect();
+            const wrapperTop = rect.top;
+            
+            // Only transform when the wrapper reaches or passes the top of the viewport
+            if (wrapperTop <= 0) {
+                // How far we have scrolled within the wrapper
+                const scrolledDistance = -wrapperTop;
+                
+                // The total scrollable distance within the sticky wrapper
+                // (subtracting window.innerHeight because the last slide rests on screen)
+                const maxScroll = rect.height - window.innerHeight;
+                
+                let progress = scrolledDistance / maxScroll;
+                // Clamp progress between 0 and 1
+                progress = Math.max(0, Math.min(1, progress));
+                
+                // Max horizontal translate distance (total width of track - 1 viewport width)
+                const maxTranslate = hTrack.scrollWidth - window.innerWidth;
+                
+                hTrack.style.transform = `translateX(${-progress * maxTranslate}px)`;
+            } else {
+                hTrack.style.transform = `translateX(0px)`;
             }
-            el = el.parentElement;
-        }
-        return false;
-    };
-
-    const handleScroll = (direction) => {
-        const currentScroll = window.scrollY;
-        let currentIndex = sections.findIndex(s => Math.abs(s.offsetTop - currentScroll) < window.innerHeight / 2);
-        
-        if (currentIndex === -1) currentIndex = 0;
-        let nextIndex = Math.max(0, Math.min(currentIndex + direction, sections.length - 1));
-
-        sections[nextIndex].scrollIntoView({
-            behavior: 'smooth',
-            block: 'start'
         });
-    };
+    }
 
-    window.addEventListener('wheel', (e) => {
-        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) return;
-
-        const direction = e.deltaY > 0 ? 1 : -1;
-        if (isScrollingInside(e.target, direction)) return;
-
-        e.preventDefault();
-        
-        // Momentum absorption: reset cooldown on every wheel event to group coasting into one scroll
-        clearTimeout(wheelTimeout);
-        wheelTimeout = setTimeout(() => {
-            isAnimating = false;
-        }, 100);
-
-        if (isAnimating) return;
-        if (Math.abs(e.deltaY) < 10) return;
-
-        isAnimating = true;
-        handleScroll(direction);
-    }, { passive: false });
-
-    window.addEventListener('touchstart', (e) => {
-        touchStartY = e.touches[0].clientY;
-        touchStartX = e.touches[0].clientX;
-    }, { passive: true });
-
-    window.addEventListener('touchmove', (e) => {
-        if (e.touches.length > 1) return;
-        
-        const touchY = e.touches[0].clientY;
-        const touchX = e.touches[0].clientX;
-        const deltaY = touchStartY - touchY;
-        const deltaX = touchStartX - touchX;
-
-        if (Math.abs(deltaX) > Math.abs(deltaY)) return;
-
-        const direction = deltaY > 0 ? 1 : -1;
-        if (isScrollingInside(e.target, direction)) return;
-
-        e.preventDefault();
-    }, { passive: false });
-
-    window.addEventListener('touchend', (e) => {
-        const touchY = e.changedTouches[0].clientY;
-        const touchX = e.changedTouches[0].clientX;
-        const deltaY = touchStartY - touchY;
-        const deltaX = touchStartX - touchX;
-
-        if (Math.abs(deltaX) > Math.abs(deltaY)) return;
-        
-        const direction = deltaY > 0 ? 1 : -1;
-        if (isScrollingInside(e.target, direction)) return;
-        
-        if (Math.abs(deltaY) < 30) return;
-        if (isAnimating) return;
-
-        isAnimating = true;
-        handleScroll(direction);
-
-        setTimeout(() => {
-            isAnimating = false;
-        }, 800);
-    }, { passive: true });
 });
