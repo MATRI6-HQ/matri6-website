@@ -1,5 +1,20 @@
+// Force scroll to top on page load/refresh
+if (history.scrollRestoration) {
+    history.scrollRestoration = 'manual';
+}
+window.scrollTo(0, 0);
+window.addEventListener('load', () => window.scrollTo(0, 0));
 
 document.addEventListener('DOMContentLoaded', () => {
+    // Automatically open external links in a new tab
+    document.querySelectorAll('a').forEach(link => {
+        if (link.hostname !== window.location.hostname && link.hostname !== '') {
+            link.setAttribute('target', '_blank');
+            link.setAttribute('rel', 'noopener noreferrer');
+        }
+    });
+
+
     const container = document.querySelector('.scroll-container');
     const header = document.getElementById('main-header');
     
