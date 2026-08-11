@@ -52,16 +52,16 @@
                     <a href="eco/commune.html" class="grid-item right-align"
                         data-image="https://picsum.photos/seed/commune/400/400">
                         COMMUNE</a>
-                    <a href="#ecosystem" class="grid-item"
+                    <a href="#" class="grid-item" onclick="showComingSoonPopup(event)"
                         data-image="https://picsum.photos/seed/venture/400/400">VENTURE
                         NETWORK</a>
-                    <a href="#ecosystem" class="grid-item right-align"
+                    <a href="#" class="grid-item right-align" onclick="showComingSoonPopup(event)"
                         data-image="https://picsum.photos/seed/hackathon/400/400">
                         HACKATHONS</a>
-                    <a href="#ecosystem" class="grid-item"
+                    <a href="#" class="grid-item" onclick="showComingSoonPopup(event)"
                         data-image="https://picsum.photos/seed/launchpad/400/400">LAUNCHPAD
                     </a>
-                    <a href="#ecosystem" class="grid-item right-align"
+                    <a href="#" class="grid-item right-align" onclick="showComingSoonPopup(event)"
                         data-image="https://picsum.photos/seed/academy/400/400">ACADEMY
                     </a>
                 </div>
@@ -650,6 +650,15 @@
             </div>
         </section>
     </main>
+
+    <!-- Coming Soon Modal -->
+    <div id="comingSoonModal" class="coming-soon-modal">
+        <div class="coming-soon-content">
+            <button class="close-modal-btn" onclick="closeComingSoonPopup()">&times;</button>
+            <h3 class="coming-soon-title">LAUNCHING SOON</h3>
+            <p class="coming-soon-text">These features are still under construction & planning and will be launched soon. Stay tuned!</p>
+        </div>
+    </div>
 
     <script src="main.js"></script>
 </body>
