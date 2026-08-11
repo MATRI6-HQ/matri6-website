@@ -332,3 +332,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
 });
+
+// Coming Soon Popup Logic
+window.showComingSoonPopup = function(e) {
+    if (e) e.preventDefault();
+    const modal = document.getElementById('comingSoonModal');
+    if (modal) modal.classList.add('show');
+};
+
+window.closeComingSoonPopup = function() {
+    const modal = document.getElementById('comingSoonModal');
+    if (modal) modal.classList.remove('show');
+};
+
+document.addEventListener('click', function(e) {
+    const modal = document.getElementById('comingSoonModal');
+    if (modal && e.target === modal) {
+        window.closeComingSoonPopup();
+    }
+});
