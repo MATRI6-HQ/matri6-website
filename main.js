@@ -331,6 +331,68 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // Smooth in-page navigation (the vision CTA -> Join MATRI6).
+    // The page is scroll-snap-type: y mandatory with scroll-snap-stop: always, which
+    // halts a native smooth scroll at every section it crosses. Snapping is switched
+    // off for the duration of the flight and restored on landing -- we finish exactly
+    // on the target's snap point, so putting it back is seamless.
+    const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const easeInOutCubic = t => t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+    let activeScroll = null;
+
+    const endScroll = () => {
+        if (!activeScroll) return;
+        cancelAnimationFrame(activeScroll.frame);
+        document.documentElement.style.scrollSnapType = activeScroll.snapType;
+        activeScroll = null;
+    };
+
+    const smoothScrollTo = (target, duration = 900) => {
+        const startY = window.scrollY;
+        const endY = Math.round(startY + target.getBoundingClientRect().top);
+        if (endY === startY) return;
+
+        endScroll();
+        const root = document.documentElement;
+        activeScroll = { frame: 0, snapType: root.style.scrollSnapType };
+        root.style.scrollSnapType = 'none';
+
+        if (reducedMotion.matches) {
+            window.scrollTo(0, endY);
+            endScroll();
+            return;
+        }
+
+        const startTime = performance.now();
+        const step = now => {
+            const t = Math.min(1, (now - startTime) / duration);
+            window.scrollTo(0, startY + (endY - startY) * easeInOutCubic(t));
+            if (t < 1) {
+                activeScroll.frame = requestAnimationFrame(step);
+            } else {
+                window.scrollTo(0, endY); // land exactly on the snap point
+                endScroll();
+            }
+        };
+        activeScroll.frame = requestAnimationFrame(step);
+    };
+
+    // Hand control straight back if the user starts scrolling mid-flight
+    ['wheel', 'touchstart', 'keydown'].forEach(evt =>
+        window.addEventListener(evt, endScroll, { passive: true }));
+
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(link => {
+        link.addEventListener('click', e => {
+            const hash = link.getAttribute('href');
+            const target = document.querySelector(hash);
+            if (!target) return;
+            e.preventDefault();
+            smoothScrollTo(target);
+            history.pushState(null, '', hash); // keep the URL shareable and the back button working
+        });
+    });
+
 });
 
 // Coming Soon Popup Logic
@@ -351,3 +413,90 @@ document.addEventListener('click', function(e) {
         window.closeComingSoonPopup();
     }
 });
+
+/*
+  Static header legibility guard.
+
+  .static-header uses mix-blend-mode: difference so the MATRI6 wordmark inverts
+  against whatever is behind it. That reads well over dark and light grounds,
+  but a saturated mid-tone (#5865F2, #0fb981, #ff6c3d ...) inverts to a colour
+  of almost identical luminance, which makes the wordmark vanish. Here we sample
+  the backdrop under the header and, only when the inverted result would be too
+  low contrast, drop to a solid light/dark wordmark instead.
+*/
+(function () {
+    const header = document.querySelector('.static-header');
+    if (!header) return;
+
+    const MIN_CONTRAST = 3.0;          // WCAG AA for large text
+    const INK_DARK = [17, 17, 17];     // .header-solid.on-light
+    const INK_LIGHT = [255, 255, 255]; // .header-solid.on-dark
+
+    function relLuminance(rgb) {
+        const a = rgb.map(function (v) {
+            v /= 255;
+            return v <= 0.03928 ? v / 12.92 : Math.pow((v + 0.055) / 1.055, 2.4);
+        });
+        return 0.2126 * a[0] + 0.7152 * a[1] + 0.0722 * a[2];
+    }
+
+    function contrast(a, b) {
+        const la = relLuminance(a), lb = relLuminance(b);
+        return (Math.max(la, lb) + 0.05) / (Math.min(la, lb) + 0.05);
+    }
+
+    // Nearest ancestor with an actually opaque background colour.
+    function backdropAt(x, y) {
+        header.style.pointerEvents = 'none';
+        let el = document.elementFromPoint(x, y);
+        header.style.pointerEvents = '';
+
+        while (el && el !== document.documentElement) {
+            const parts = getComputedStyle(el).backgroundColor.match(/[\d.]+/g);
+            if (parts && (parts.length < 4 || parseFloat(parts[3]) > 0.5)) {
+                return [+parts[0], +parts[1], +parts[2]];
+            }
+            el = el.parentElement;
+        }
+        return null;
+    }
+
+    function update() {
+        const rect = header.getBoundingClientRect();
+        const bg = backdropAt(rect.left + rect.width / 2, rect.top + rect.height / 2);
+        if (!bg) return;
+
+        const inverted = bg.map(function (v) { return 255 - v; });
+
+        if (contrast(inverted, bg) >= MIN_CONTRAST) {
+            header.classList.remove('header-solid', 'on-dark', 'on-light');
+        } else {
+            // Pick whichever of the two solid inks actually scores higher rather
+            // than thresholding on luminance -- mid-tones like #ff6c3d sit close
+            // enough to the middle that a fixed cutoff picks the wrong one.
+            const dark = contrast(INK_DARK, bg) >= contrast(INK_LIGHT, bg);
+            header.classList.add('header-solid');
+            header.classList.toggle('on-light', dark);
+            header.classList.toggle('on-dark', !dark);
+        }
+    }
+
+    let queued = false;
+    function schedule() {
+        if (queued) return;
+        queued = true;
+        requestAnimationFrame(function () {
+            queued = false;
+            update();
+        });
+    }
+
+    window.addEventListener('scroll', schedule, { passive: true });
+    window.addEventListener('resize', schedule);
+
+    // main.js is loaded at the end of <body>, so layout is already available:
+    // resolve the first state synchronously rather than waiting on a frame,
+    // otherwise the wordmark can paint in the wrong colour before rAF runs.
+    update();
+    window.addEventListener('load', update);
+})();
