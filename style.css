@@ -191,11 +191,30 @@ section {
     text-transform: uppercase;
     line-height: 1;
     
+    /* Mix blend mode for dynamic color contrast, matching #main-header.
+       Inverts against whatever is behind it so the wordmark stays legible
+       over dark sections, light sections and colored type alike. */
     color: white; 
+    mix-blend-mode: difference;
     
     display: flex;
     justify-content: space-between;
     padding-bottom: 12px;
+}
+
+/* Applied by main.js when difference blending would land on a backdrop whose
+   inverse has near-identical luminance (saturated mid-tones like #5865F2 or
+   #0fb981). Falls back to a plain light/dark wordmark so it stays readable. */
+.static-header.header-solid {
+    mix-blend-mode: normal;
+}
+
+.static-header.header-solid.on-dark {
+    color: #ffffff;
+}
+
+.static-header.header-solid.on-light {
+    color: #111111;
 }
 
 .title-placeholder {
@@ -550,6 +569,8 @@ section {
 }
 
 .vision-btn {
+    display: inline-block;
+    text-decoration: none;
     background-color: var(--primary-bg);
     color: #58aaf2;
     font-family: 'Space Grotesk', sans-serif;
