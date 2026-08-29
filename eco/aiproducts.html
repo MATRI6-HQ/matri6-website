@@ -178,6 +178,85 @@
             color: var(--accent);
         }
 
+        /* ---- Classified copy: blurred body with an "In Production" seal ---- */
+        .ai-card-veil {
+            position: relative;
+            display: block;
+        }
+
+        .ai-card-veil .ai-card-body {
+            filter: blur(6px);
+            opacity: 0.5;
+            user-select: none;
+            -webkit-user-select: none;
+            pointer-events: none;
+            transition: filter 0.45s ease, opacity 0.45s ease;
+        }
+
+        .ai-card:hover .ai-card-veil .ai-card-body {
+            filter: blur(8px);
+            opacity: 0.4;
+        }
+
+        .ai-card-veil-tag {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-family: 'IBM Plex Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+            white-space: nowrap;
+            color: var(--accent);
+            padding: 0.65rem 1.1rem;
+            border: 1px solid var(--accent);
+            background-color: rgba(28, 28, 28, 0.72);
+            -webkit-backdrop-filter: blur(2px);
+            backdrop-filter: blur(2px);
+        }
+
+        .ai-card-veil-tag::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background-color: var(--accent);
+            animation: veil-pulse 2.4s ease-in-out infinite;
+        }
+
+        @keyframes veil-pulse {
+
+            0%,
+            100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+
+            50% {
+                opacity: 0.25;
+                transform: scale(0.7);
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .ai-card-veil-tag::before {
+                animation: none;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .ai-card-veil-tag {
+                font-size: 0.625rem;
+                letter-spacing: 0.18em;
+                padding: 0.55rem 0.9rem;
+            }
+        }
+
         @media (max-width: 1024px) {
             .ai-grid {
                 grid-template-columns: repeat(2, 1fr);
@@ -274,9 +353,12 @@
                     <article class="ai-card" style="--accent: #ff6c3d;">
                         <h3 class="ai-card-title">Brickstone</h3>
                         <span class="ai-card-rule"></span>
-                        <p class="ai-card-body">Architecture visualisation, rebuilt around AI. Turn plans, sketches
-                            and rough massing into renders clients can feel. Iterate in minutes instead of weeks,
-                            and walk into every review with something worth looking at.</p>
+                        <div class="ai-card-veil">
+                            <p class="ai-card-body" aria-hidden="true">Architecture visualisation, rebuilt around AI. Turn plans, sketches
+                                and rough massing into renders clients can feel. Iterate in minutes instead of weeks,
+                                and walk into every review with something worth looking at.</p>
+                            <span class="ai-card-veil-tag">In Production</span>
+                        </div>
                         <div class="ai-card-foot">
                             <div class="ai-card-glyph" data-seed="31"></div>
                             <a class="ai-card-link" href="https://brickstone.matri6.com">Learn More</a>
@@ -287,9 +369,12 @@
                     <article class="ai-card" style="--accent: #d4b8ff;">
                         <h3 class="ai-card-title">Postelligence</h3>
                         <span class="ai-card-rule"></span>
-                        <p class="ai-card-body">A social media assistant that plans, writes, schedules and learns.
-                            It watches what lands and what dies, then adjusts. Consistency stops being a discipline
-                            problem and starts being a solved one.</p>
+                        <div class="ai-card-veil">
+                            <p class="ai-card-body" aria-hidden="true">A social media assistant that plans, writes, schedules and learns.
+                                It watches what lands and what dies, then adjusts. Consistency stops being a discipline
+                                problem and starts being a solved one.</p>
+                            <span class="ai-card-veil-tag">In Production</span>
+                        </div>
                         <div class="ai-card-foot">
                             <div class="ai-card-glyph" data-seed="43"></div>
                             <a class="ai-card-link" href="#" onclick="showComingSoonPopup(event)">Learn More</a>
@@ -300,9 +385,12 @@
                     <article class="ai-card" style="--accent: #fca5a6;">
                         <h3 class="ai-card-title">Shoutkr</h3>
                         <span class="ai-card-rule"></span>
-                        <p class="ai-card-body">Planning something? Just Shoutkr. One shout goes out, everyone who
-                            matters sees it, and the plan assembles itself — times, places, who's actually coming.
-                            The group chat finally stops being where plans go to die.</p>
+                        <div class="ai-card-veil">
+                            <p class="ai-card-body" aria-hidden="true">Planning something? Just Shoutkr. One shout goes out, everyone who
+                                matters sees it, and the plan assembles itself — times, places, who's actually coming.
+                                The group chat finally stops being where plans go to die.</p>
+                            <span class="ai-card-veil-tag">In Production</span>
+                        </div>
                         <div class="ai-card-foot">
                             <div class="ai-card-glyph" data-seed="57"></div>
                             <a class="ai-card-link" href="#" onclick="showComingSoonPopup(event)">Learn More</a>
