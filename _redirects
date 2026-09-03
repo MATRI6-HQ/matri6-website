@@ -1,0 +1,13 @@
+# Clean-URL migration. Old .html paths -> new directory URLs.
+/about.html            /about/               301
+/privacy.html          /privacy/             301
+/terms.html            /terms/               301
+/eco/aiproducts.html   /eco/ai-products/     301
+/eco/commune.html      /eco/commune/         301
+
+# Trailing-slash normalisation
+/about                 /about/               301
+/privacy               /privacy/             301
+/terms                 /terms/               301
+/eco/ai-products       /eco/ai-products/     301
+/eco/commune           /eco/commune/         301

@@ -1,0 +1,9 @@
+# https://matri6.com/robots.txt
+
+User-agent: *
+Allow: /
+
+# Nothing here is private. CSS, JS, images and the canvas art are all
+# required to render the site, so nothing is disallowed.
+
+Sitemap: https://matri6.com/sitemap.xml
